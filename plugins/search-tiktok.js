@@ -1,14 +1,31 @@
-import fetch from 'node-fetch'
-let handler = async(m, { conn, text, usedPrefix, command }) => {
-    if (!text) return m.reply(`Masukan Judul Video!\n\nContoh : \n${usedPrefix + command} Hu Tao Amv`)
-    await m.reply('_In Progress Please Wait..._')
-    let response = await fetch(API('skizo', '/api/ttsearch', { search: text }, 'apikey'))
-    let data = await response.json()
-    conn.sendFile(m.chat, data.play, 'tiktok.mp4', data.title, m)
+import { ttSearch } from '../scraper/ttSearch.js'
+let handler = async (m, {
+    conn,
+    args,
+    text,
+    usedPrefix,
+    command
+}) => {
+    let input = `[!] *wrong input*
+	
+Ex : ${usedPrefix + command} story wa`
+	if (!text) return m.reply(input)
+ m.reply(wait)
+ttSearch(text).then(a => {
+let b = a.videos[`${num.getRandom()}`]
+let cap = b.title
+let result = 'https://tikwm.com/' + b.play
+conn.sendMessage(m.chat, {video: {url: result}, caption: cap}, {quoted: m})
+}).catch(err => {
+m.reply(eror)
+})
 }
 handler.help = ['tiktoksearch']
-handler.tags = ['search']
-handler.command = /^tiktoksearch|ttsearch$/i
-handler.onlyprem = true
-handler.limit = true
+handler.tags = ['downloader']
+handler.command = /^(ttsearch|tiktoksearch)$/i
+handler.limit = 5
+handler.register = true
+
 export default handler
+
+const num = ['0','1','2','3','4','5','6','7','8','9']
