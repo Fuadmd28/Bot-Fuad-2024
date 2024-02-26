@@ -322,7 +322,7 @@ export async function handler(chatUpdate) {
                 global.db.data.users[m.sender] = {
                 money: 0,
                 exp: 0,
-                limit: 50,
+                limit: 80,
                 freelimit: 0,
                 lastclaim: 0,
                 skata: 0,
