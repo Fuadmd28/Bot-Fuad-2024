@@ -511,7 +511,7 @@ export async function handler(chatUpdate) {
                 delete: true,
                 antiLink: false,
                 pembatasan: false,
-                antiLinkWa: false,
+                antiLinkWa: true,
                 antiSticker: false,
                 viewonce: false,
                 antiToxic: false,
@@ -520,7 +520,7 @@ export async function handler(chatUpdate) {
                 simi: false,
                 nsfw: false,
                 mute: false,
-                rpg: true,
+                rpg: false,
                 game: true,
                 teks: true,
                 autolevelup: false,
@@ -550,10 +550,10 @@ export async function handler(chatUpdate) {
                 restartDB: 0,
                 backup: false,
                 backupDB: 0,
-                cleartmp: false,
+                cleartmp: true,
                 lastcleartmp: 0,
                 status: 0,
-                anticall: true,
+                anticall: false,
             }
         } catch (e) {
             console.error(e)
