@@ -1,29 +1,43 @@
+// Update By Xnuvers007
+
 import fetch from 'node-fetch'
-let handler = async(m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `Judul Manganya Mana?\n\nContoh: \n${usedPrefix + command} majo no tabitabi`
-  let res = await fetch(API('lol', '/api/manga', { query: text }, 'apikey'))
-  if (!res.ok) throw await res.text()
-  let json = await res.json()
-  let desc = json.result.description.replace(/<br>/gi, '')
-  let teks = `乂 *Manga Search*
 
-❃ *Title Romaji:* ${json.result.title.romaji} ${json.result.title.english ? `
-❃ *Title English:* ${json.result.title.english}` : ''}
-
-❃ *Format:* ${json.result.format} ${json.result.chapters == 'null' ? `
-❃ *Chapters:* ${json.result.chapters}` : ''} ${json.result.status == 'null' ? `
-❃ *Volume:* ${json.result.volumes}` : ''}
-❃ *Genre:* ${json.result.genres}
-❃ *Status:* ${json.result.status}
-❃ *Source:* ${json.result.source} ${json.result.averageScore == 'null' ? `
-❃ *Score:* ${json.result.averageScore}` : ''}
-
-❃ *Deskripsion:* ${desc}
+var handler = async (m, { conn, text }) => {
+if (!text) throw `*Masukan Judul Manga Yang Ingin Kamu Cari !*`
+conn.reply(m.chat, 'Sedang mencari manga... Silahkan tunggu', m)
+let res = await fetch('https://api.jikan.moe/v4/manga?q=' + text)
+if (!res.ok) throw 'Tidak Ditemukan'
+let json = await res.json()
+let { chapters, url, type, score, scored, scored_by, rank, popularity, members, background, status, volumes, synopsis, favorites } = json.data[0]
+// let author = json.data[0].authors[0].name
+// let authormynimelist = json.data[0].authors[0].url
+let judul = json.data[0].titles.map(jud => `${jud.title} [${jud.type}]`).join('\n');
+let xnuvers007 = json.data[0].authors.map(Xnuvers007 => `${Xnuvers007.name} (${Xnuvers007.url})`).join('\n');
+let genrenya = json.data[0].genres.map(xnvrs007 => `${xnvrs007.name}`).join('\n');
+  
+let animeingfo = `📚 ᴛɪᴛʟᴇ: ${judul}
+📑 ᴄʜᴀᴘᴛᴇʀ: ${chapters}
+✉️ ᴛʀᴀɴsᴍɪsɪ: ${type}
+🗂 sᴛᴀᴛᴜs: ${status}
+😎 Genre: ${genrenya}
+🗃 ᴠᴏʟᴜᴍᴇs: ${volumes}
+🌟 ғᴀᴠᴏʀɪᴛᴇ: ${favorites}
+🧮 sᴄᴏʀᴇ: ${score}
+🧮 SCORED: ${scored}
+🧮 SCORED BY: ${scored_by}
+🌟 Rank: ${rank}
+🤩 Popularitas: ${popularity}
+👥 ᴍᴇᴍʙᴇʀs: ${members}
+⛓️ ᴜʀʟ: ${url}
+👨‍🔬 ᴀᴜᴛʜᴏʀs: ${xnuvers007}
+📝 ʙᴀᴄᴋɢʀᴏᴜɴᴅ: ${background}
+💬 sɪɴᴏᴘsɪs: ${synopsis}
 `
-  await conn.sendFile(m.chat, json.result.coverImage.large, 'mangasearch.jpg', teks, m)
+conn.sendFile(m.chat, json.data[0].images.jpg.image_url, 'manga.jpg', `*MANGA INFO*\n` + animeingfo, m)
+    conn.reply(m.chat, 'JANGAN LUPA SUPPORT DEVELOPERNYA\nꜰᴜʀɪɴᴀ ᴏɴʟʏ ᴏɴᴇ\n', m)
 }
-handler.help = ['mangasearch']
+handler.help = ['mangainfo <manga>','manga <namaManga>','infomanga <NamaManga/Anime>']
 handler.tags = ['anime']
-handler.command = /^mangasearch$/i
+handler.command = /^(mangainfo|manga|infomanga)$/i
 handler.limit = true
 export default handler
