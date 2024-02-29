@@ -32,9 +32,8 @@ let handler = async (m, { conn, text }) => {
 
 handler.command = /^(igdl|instagram|ig)$/i
 handler.tags = ['downloader']
-handler.help = ['instagram','ig']
+handler.help = ['instagram','ig','igdl']
 handler.premium = false
-handler.limit = true
-handler.onlyprem = true
+handler.limit = 4
 
 export default handler
