@@ -326,8 +326,8 @@ global.hwaifu = [
 ]
 
 /*============== STICKER WM ==============*/
-global.stickpack = '© 𝙇𝙊𝙁𝙄 𝘽𝙮 𝘽𝙖𝙣𝙜 𝙁𝘿'
-global.stickauth = '𝙇𝙊𝙁𝙄 💞'
+global.stickpack = '© 𝙇𝙊𝙁𝙄 💞 𝘽𝙮'
+global.stickauth = '𝘽𝙖𝙣𝙜 𝙁𝘿 ✨'
 
 global.multiplier = 38 // The higher, The harder levelup
 
