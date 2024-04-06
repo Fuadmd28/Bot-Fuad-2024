@@ -30,7 +30,7 @@ global.info = {
 
 /*============== STAFF ==============*/
 global.owner = [
-  ['6282147781510', 'PEMILIK BOT', true],
+  ['6287787384847', 'PEMILIK BOT', true],
 ] // Put your number here
 global.mods = [] // Want some help?
 global.prems = [] // Premium user bukan disini nambahinnya, ketik .addprem @user 10
